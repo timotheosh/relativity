@@ -14,12 +14,11 @@
 ;; Taken from General Relative Velocity described here: https://en.wikipedia.org/wiki/Relative_velocity
 ;; Also generated from ChatGPT after giving the proper formula from Wikipedia
 (defn general-relative-velocity [vA vB]
-  (let [c 299792458.0 ; speed of light in m/s
-        dot-product (* vA vB)
-        numerator (- (* c c) (* vA vA))
-        denominator (- (* c c) dot-product)
+  (let [dot-product (* vA vB)
+        numerator (- (* speed-of-light speed-of-light) (* vA vA))
+        denominator (- (* speed-of-light speed-of-light) dot-product)
         square-root-term (Math/sqrt (- 1 (/ (* numerator numerator) (* denominator denominator))))]
-    (* square-root-term c)))
+    (* square-root-term speed-of-light)))
 
 
 (defn relativistic-correction
@@ -39,12 +38,10 @@
     ##NaN
     (/ 1 (relativistic-correction velocity))))
 
-(let [velocity 100000000
-      dilation (time-dilation 600 velocity) ; If proper time Δt is 1 second and velocity is 1000 m/s
-      lorentz (lorentz-factor velocity)]
-  (cl-format true "Velocity: ~R~%Dilation: ~A~%Lorentz: ~A" velocity dilation lorentz))
-
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (let [velocity 100000000
+        dilation (time-dilation 600 velocity) ; If proper time Δt is 1 second and velocity is 1000 m/s
+        lorentz (lorentz-factor velocity)]
+    (cl-format true "Velocity: ~R~%Dilation: ~A~%Lorentz: ~A" velocity dilation lorentz)))
