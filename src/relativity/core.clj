@@ -4,12 +4,15 @@
 
 (def speed-of-light 299792458.0) ; speed of light in m/s
 
+;; ChatGPT Answer. Treat with great skepticism.
 (defn relative-velocity
   "Calculate the relative velocity w between two frames with velocities velocity-a and velocity-b."
   [velocity-a velocity-b]
   (/ (+ velocity-a velocity-b) (+ 1 (* (/ velocity-a speed-of-light) (/ velocity-b speed-of-light)))))
 
 
+;; Taken from General Relative Velocity described here: https://en.wikipedia.org/wiki/Relative_velocity
+;; Also generated from ChatGPT after giving the proper formula from Wikipedia
 (defn general-relative-velocity [vA vB]
   (let [c 299792458.0 ; speed of light in m/s
         dot-product (* vA vB)
